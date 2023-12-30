@@ -13,17 +13,17 @@ print(ascii_art)
 
 p_key = "Price"
 
-A1 = {"A1": "Mountain Dew", p_key: 2.50, "Stock": 10}
-A2 = {"A2": "Thumbs Up", p_key: 2.00, "Stock": 5}
-A3 = {"A3": "Lipton-Ice Tea", p_key: 2.00, "Stock": 2}
+A1 = {"A1": "Mountain Dew", p_key: 2.50, "stock": 10}
+A2 = {"A2": "Thumbs Up", p_key: 2.00, "stock": 5}
+A3 = {"A3": "Lipton-Ice Tea", p_key: 2.00, "stock": 2}
 
-B1 = {"B1": "Lays Max", p_key: 2.50, "Stock": 10}
-B2 = {"B2": "Cheetos Flaming hot", p_key: 3.50, "Stock": 30}
-B3 = {"B3": "Super rings", p_key: 4.00, "Stock": 18}
+B1 = {"B1": "Lays Max", p_key: 2.50, "stock": 10}
+B2 = {"B2": "Cheetos Flaming hot", p_key: 3.50, "stock": 30}
+B3 = {"B3": "Super rings", p_key: 4.00, "stock": 18}
 
-C1 = {"C1": "Twix", p_key: 2.50, "Stock": 4}
-C2 = {"C2": "Snickers", p_key: 4.00, "Stock": 7}
-C3 = {"C3": "Kinder Bueno", p_key: 5.50, "Stock": 20}
+C1 = {"C1": "Twix", p_key: 2.50, "stock": 4}
+C2 = {"C2": "Snickers", p_key: 4.00, "stock": 7}
+C3 = {"C3": "Kinder Bueno", p_key: 5.50, "stock": 20}
 
 inventory = [A1, A2, A3, B1, B2, B3, C1, C2, C3]
 
@@ -43,13 +43,13 @@ item_pairs = {
 # Displays the inventory
 def display_invent():
     table = PrettyTable()
-    table.field_names = ["Item Code", "Item", "Price", "Stock"]
+    table.field_names = ["Item Code", "Item", "Price", "stock"]
 
     for item in inventory:
         item_code = next(iter(item.keys()))
         item_name = item[item_code]
         item_price = item[p_key]
-        item_stock = item["Stock"]
+        item_stock = item["stock"]
 
         table.add_row([item_code, item_name, item_price, item_stock])
 
@@ -60,7 +60,7 @@ def v_machine():
     while True:
         display_invent()
 
-        item_code = input("Enter The Item Code You Want To Purchase")
+        item_code = input("Enter The Item Code You Want To Purchase: ")
         item = next((item for item in inventory if item_code in item), None)
 
         if not item:
@@ -69,13 +69,13 @@ def v_machine():
 
         quantity = int(input("Enter the quantity you want to buy: "))
 
-        if quantity > item["Stock"]:
-            print(f"Sorry, only {item['Stock']}of that item are available. ")
+        if quantity > item["stock"]:
+            print(f"Sorry, only {item['stock']} of that item are available. ")
             continue
         total_cost = quantity * item[p_key]
-        print(f'The total cost for{quantity} {item[item_code]}: ${total_cost:.2f}')
+        print(f'The total cost for {quantity} {item[item_code]}: ${total_cost:.2f}')
 
-        payment = float(input(" Enter the amount you are paying: $"))
+        payment = float(input("Enter the amount you are paying: $"))
         
         total_cost = item[p_key] * quantity
 
@@ -86,7 +86,7 @@ def v_machine():
         change = payment - total_cost
         print(f"Here is your Change : ${change:.2f}")
 
-        item["Stock"] -= quantity
+        item["stock"] -= quantity
         print(f"Thank you for your Purchase! Enjoy Your {quantity} {item[item_code]}")
 
         sug_pair = item_pairs.get(item_code, [])
@@ -116,7 +116,7 @@ def v_machine():
                     print(f"Thank You For Your Purchase! Enjoy Your {p_name}")
                 
                 else:
-                    print(f"Sorry {p_name} Is Currently Out Of Stock.")
+                    print(f"Sorry {p_name} Is Currently Out Of stock.")
             else:
                 print("Thank you for the purchase, hope you have a wonderful day. \n Please Come Back Again.")
 
